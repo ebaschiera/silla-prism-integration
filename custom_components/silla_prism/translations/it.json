@@ -111,6 +111,9 @@
             "core_temperature": {
                 "name": "Temperatura della CPU"
             },
+            "firmware_version": {
+                "name": "Versione firmware"
+            },
             "input_grid_energy": {
                 "name": "Energia totale dalla rete"
             },

@@ -61,21 +61,22 @@ class SillaPrismConfigFlow(ConfigFlow, domain=DOMAIN):
         self._max_current: int = DEFAULT_MAX_CURRENT
 
     async def fetch_device_info(self) -> str | None:
-        """Fetech information from MQTT."""
+        """Fetch information from MQTT to verify device is reachable."""
         assert self._topic is not None
         error = None
         event = asyncio.Event()
 
         async def message_received(msg):
             """Handle new messages on MQTT."""
-            _LOGGER.debug("New intent: %s", msg.payload)
+            _LOGGER.debug("Received message on topic %s: %s", msg.topic, msg.payload)
             event.set()
 
-        topic1 = self._topic + "0/info/temperature/core"
+        # Subscribe to topics available in firmware 4.0
+        topic1 = self._topic + "1/state"
         _LOGGER.debug("Subscribing test topic1: %s", topic1)
         unsub_topic1 = await mqtt.async_subscribe(self.hass, topic1, message_received)
 
-        topic2 = self._topic + "energy_data/power_grid"
+        topic2 = self._topic + "1/w"
         _LOGGER.debug("Subscribing test topic2: %s", topic2)
         unsub_topic2 = await mqtt.async_subscribe(self.hass, topic2, message_received)
 

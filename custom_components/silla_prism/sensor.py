@@ -12,6 +12,7 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
+    EntityCategory,
     STATE_UNAVAILABLE,
     STATE_UNKNOWN,
     UnitOfElectricCurrent,
@@ -360,6 +361,14 @@ BASE_SENSORS: tuple[PrismSensorEntityDescription, ...] = (
         suggested_display_precision=0,
         has_entity_name=True,
         translation_key="core_temperature",
+    ),
+    PrismSensorEntityDescription(
+        key="firmware_version",
+        topic="hello",
+        expire_after=86400,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        has_entity_name=True,
+        translation_key="firmware_version",
     ),
 )
 

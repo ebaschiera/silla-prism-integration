@@ -111,6 +111,9 @@
             "core_temperature": {
                 "name": "CPU temperature"
             },
+            "firmware_version": {
+                "name": "Firmware version"
+            },
             "input_grid_energy": {
                 "name": "Total energy from grid"
             },
